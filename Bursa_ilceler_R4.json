@@ -17,7 +17,7 @@
 {"arcs":[[0,1,2,3,4,5,6,7,8]],"type":"Polygon","properties":{"UAVT_KODU":183525,"OBJECTID":810,"AD_1":"OSMANGAZİ","AD_0":"BURSA","ID_0":16,"ID_1":198}},
 {"arcs":[[9,-3,10,11,12]],"type":"Polygon","properties":{"UAVT_KODU":184223,"OBJECTID":2,"AD_1":"MUDANYA","AD_0":"BURSA","ID_0":16,"ID_1":190}},
 {"arcs":[[13,14,-12,15,16]],"type":"Polygon","properties":{"UAVT_KODU":184059,"OBJECTID":1,"AD_1":"KARACABEY","AD_0":"BURSA","ID_0":16,"ID_1":188}},
-{"arcs":[[17,18,19,20,21,-14]],"type":"Polygon","properties":{"UAVT_KODU":184463,"OBJECTID":6,"AD_1":"MUSTAFA KEMALPAŞA","AD_0":"BURSA","ID_0":16,"ID_1":191}},
+{"arcs":[[17,18,19,20,21,-14]],"type":"Polygon","properties":{"UAVT_KODU":184463,"OBJECTID":6,"AD_1":"MUSTAFAKEMALPAŞA","AD_0":"BURSA","ID_0":16,"ID_1":191}},
 {"arcs":[[22,23,24,-4,-10,25,26]],"type":"Polygon","properties":{"UAVT_KODU":183617,"OBJECTID":17,"AD_1":"GEMLİK","AD_0":"BURSA","ID_0":16,"ID_1":185}},
 {"arcs":[[27,-19,28,-16,-11,-2]],"type":"Polygon","properties":{"UAVT_KODU":183441,"OBJECTID":9,"AD_1":"NİLÜFER","AD_0":"BURSA","ID_0":16,"ID_1":197}},
 {"arcs":[[29,30,31,32,-27,33]],"type":"Polygon","properties":{"UAVT_KODU":184667,"OBJECTID":60,"AD_1":"ORHANGAZİ","AD_0":"BURSA","ID_0":16,"ID_1":193}},
