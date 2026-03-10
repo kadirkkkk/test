@@ -1,12 +1,11 @@
-name: Update README with New Files
+name: Update README Index
 
 on:
   push:
     paths:
-      - '**.geojson'  # Triggers when any .geojson file is added anywhere
-      - '**.json'     # Triggers for .json files
-      # OR use '*' to monitor every file in the root
-  workflow_dispatch:      # Adds a manual "Run" button in the Actions tab
+      - '**.geojson'
+      - '**.json'
+  workflow_dispatch:
 
 jobs:
   update-readme:
@@ -17,44 +16,41 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Update README
+      - name: Rebuild README Table
         run: |
-          FOLDER="test"
+          # 1. Debug: Show all files in the runner so you can check paths in the log
+          echo "Listing all files in the current directory:"
+          ls -R
+          
+          # 2. Setup
           README="README.md"
           REPO="${{ github.repository }}"
           
-          # 1. Create README if it doesn't exist with a table header
-          if [ ! -f "$README" ]; then
-            echo "# File Index" > "$README"
-            echo "| Filename | Raw Link |" >> "$README"
-            echo "| --- | --- |" >> "$README"
+          echo "# File Index" > $README
+          echo "| Filename | Raw Link |" >> $README
+          echo "| --- | --- |" >> $README
+          
+          # 3. Find files (Case-insensitive search for .json and .geojson)
+          # This finds files in the root and subfolders
+          find . -maxdepth 1 -type f \( -iname "*.geojson" -o -iname "*.json" \) | while read -r file; do
+            FILENAME=$(basename "$file")
             
-            # If creating for the first time, add all existing files in the folder
-            for file in "$FOLDER"/*; do
-              if [ -f "$file" ]; then
-                FILENAME=$(basename "$file")
-                RAW_URL="https://raw.githubusercontent.com/$REPO/refs/heads/main/$FOLDER/$FILENAME"
-                echo "| $FILENAME | $RAW_URL |" >> "$README"
-              fi
-            done
-          else
-            # 2. If README exists, only add the newly added files from this push
-            NEW_FILES=$(git diff-tree --no-commit-id --name-only -r --diff-filter=A ${{ github.sha }} | grep "^$FOLDER/")
-            
-            for file in $NEW_FILES; do
-              FILENAME=$(basename "$file")
-              RAW_URL="https://raw.githubusercontent.com/$REPO/refs/heads/main/$FOLDER/$FILENAME"
+            # Skip the README itself
+            if [ "$FILENAME" != "$README" ]; then
+              RAW_URL="https://raw.githubusercontent.com/$REPO/refs/heads/main/$FILENAME"
               echo "| $FILENAME | $RAW_URL |" >> "$README"
-            done
-          fi
+            fi
+          done
 
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "docs: update README with new file links" || exit 0
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to README.md."
+          else
+            git commit -m "docs: sync file index in README"
+            git push
+          fi
