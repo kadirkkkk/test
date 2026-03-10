@@ -19,11 +19,7 @@ jobs:
 
       - name: Rebuild README Table
         run: |
-          # 1. Debug: Show all files in the runner so you can check paths in the log
-          echo "Listing all files in the current directory:"
-          ls -R
-          
-          # 2. Setup
+          shopt -s nullglob
           README="README.md"
           REPO="${{ github.repository }}"
           
@@ -31,14 +27,17 @@ jobs:
           echo "| Filename | Raw Link |" >> $README
           echo "| --- | --- |" >> $README
           
-          # 3. Find files (Case-insensitive search for .json and .geojson)
-          # This finds files in the root and subfolders
+          # Find files and handle spaces in the loop
           find . -maxdepth 1 -type f \( -iname "*.geojson" -o -iname "*.json" \) | while read -r file; do
             FILENAME=$(basename "$file")
             
-            # Skip the README itself
             if [ "$FILENAME" != "$README" ]; then
-              RAW_URL="https://raw.githubusercontent.com/$REPO/refs/heads/main/$FILENAME"
+              # Replace spaces with %20 for the URL
+              ENCODED_FILENAME=$(echo "$FILENAME" | sed 's/ /%20/g')
+              
+              RAW_URL="https://raw.githubusercontent.com/$REPO/refs/heads/main/$ENCODED_FILENAME"
+              
+              # Add to table: [Original Name] | [Encoded URL]
               echo "| $FILENAME | $RAW_URL |" >> "$README"
             fi
           done
@@ -49,8 +48,8 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           if git diff --staged --quiet; then
-            echo "No changes to README.md."
+            echo "No changes."
           else
-            git commit -m "docs: sync file index in README"
+            git commit -m "docs: fix URL encoding for spaces"
             git push
           fi
