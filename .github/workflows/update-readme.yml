@@ -2,9 +2,10 @@ name: Update README with New Files
 
 on:
   push:
-    # Change 'your-folder-name' to the folder you want to monitor
     paths:
-      - 'test/**'
+      - '**.geojson'  # Triggers when any .geojson file is added anywhere
+      - '**.json'     # Triggers for .json files
+      # OR use '*' to monitor every file in the root
   workflow_dispatch:      # Adds a manual "Run" button in the Actions tab
 
 jobs:
