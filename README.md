@@ -14,7 +14,6 @@
 | countries.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/countries.geojson |
 | Bursa_ilceler_R4_simplfy5_withilce123.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/Bursa_ilceler_R4_simplfy5_withilce123.geojson |
 | US_StateMap_simp20.json | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/US_StateMap_simp20.json |
-| aa.json | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/aa.json |
 | Kastamonu_Merkez_ilce.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/Kastamonu_Merkez_ilce.geojson |
 | Izmir_Buca_Mahalle_simp15.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/Izmir_Buca_Mahalle_simp15.geojson |
 | Kocaeli_Izmit.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/Kocaeli_Izmit.geojson |
