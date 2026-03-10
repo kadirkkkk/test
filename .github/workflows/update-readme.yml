@@ -1,0 +1,58 @@
+name: Update README with New Files
+
+on:
+  push:
+    # Change 'your-folder-name' to the folder you want to monitor
+    paths:
+      - 'test/**'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update README
+        run: |
+          FOLDER="test"
+          README="README.md"
+          REPO="${{ github.repository }}"
+          
+          # 1. Create README if it doesn't exist with a table header
+          if [ ! -f "$README" ]; then
+            echo "# File Index" > "$README"
+            echo "| Filename | Raw Link |" >> "$README"
+            echo "| --- | --- |" >> "$README"
+            
+            # If creating for the first time, add all existing files in the folder
+            for file in "$FOLDER"/*; do
+              if [ -f "$file" ]; then
+                FILENAME=$(basename "$file")
+                RAW_URL="https://raw.githubusercontent.com/$REPO/refs/heads/main/$FOLDER/$FILENAME"
+                echo "| $FILENAME | $RAW_URL |" >> "$README"
+              fi
+            done
+          else
+            # 2. If README exists, only add the newly added files from this push
+            NEW_FILES=$(git diff-tree --no-commit-id --name-only -r --diff-filter=A ${{ github.sha }} | grep "^$FOLDER/")
+            
+            for file in $NEW_FILES; do
+              FILENAME=$(basename "$file")
+              RAW_URL="https://raw.githubusercontent.com/$REPO/refs/heads/main/$FOLDER/$FILENAME"
+              echo "| $FILENAME | $RAW_URL |" >> "$README"
+            done
+          fi
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: update README with new file links" || exit 0
+          git push
