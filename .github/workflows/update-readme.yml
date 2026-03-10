@@ -5,6 +5,7 @@ on:
     # Change 'your-folder-name' to the folder you want to monitor
     paths:
       - 'test/**'
+  workflow_dispatch:      # Adds a manual "Run" button in the Actions tab
 
 jobs:
   update-readme:
