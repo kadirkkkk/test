@@ -28,7 +28,6 @@
 | countries_simp45.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/countries_simp45.geojson |
 | Aydın Kuşadası mahalle_simp7.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/Aydın Kuşadası mahalle_simp7.geojson |
 | World_Countries_(Generalized)_simplyfied.json | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/World_Countries_(Generalized)_simplyfied.json |
-| bb.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/bb.geojson |
 | Mugla_Yatagan_mahalleler_simp10.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/Mugla_Yatagan_mahalleler_simp10.geojson |
 | Kastamonu Ilceler_simp20.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/Kastamonu Ilceler_simp20.geojson |
 | TR_Cities_polygon_old.geojson | https://raw.githubusercontent.com/kadirkkkk/test/refs/heads/main/TR_Cities_polygon_old.geojson |
